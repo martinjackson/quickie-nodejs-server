@@ -1,0 +1,4 @@
+*.mp4
+t.sh
+node_modules
+ssl

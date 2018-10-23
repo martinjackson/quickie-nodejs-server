@@ -1,0 +1,82 @@
+
+   :root {
+     --base: #cbc7f3;
+     --ink: green;
+     --darkink: darkgreen;
+   }
+
+   body {
+      margin-top: 10%;
+      margin-bottom: 10%;
+      margin-left: 10%;
+      margin-right: 10%;
+      background-image: url('./background.jpg');
+      background-size:     cover;                      /* <------ */
+      background-repeat:   no-repeat;
+      background-position: center center;              /* optional, center the image */
+      color: var(--base);
+   }
+
+   .center {
+       margin: auto;
+       width: 80%;
+       padding: 10px;
+       /* border: 3px solid green; */
+       /* text-align: center; */
+   }
+
+   h1 {
+     font-size: 3em;
+     color: var(--base);
+   }
+
+   /* unvisited link */
+   a:link {
+       color: var(--ink);
+   }
+
+   /* visited link */
+   a:visited {
+       color: var(--ink);
+   }
+
+   /* mouse over link */
+   a:hover {
+       color: var(--darkink);
+   }
+
+   /* selected link */
+   a:active {
+       color: var(--darkink);
+   }
+
+   p code {
+     padding: 2px 4px;
+     font-size: 90%;
+     color: #517356;
+     background-color: #c7f3d1;
+     border-radius: 3px;
+   }
+   pre {
+           font-family: monospace;
+           background-color: #92d29d;
+           white-space: pre;
+           display: block;
+           margin-top: 0;
+           margin-bottom: 16px;
+           padding: 16px;
+       }
+    ul {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    li {
+      -webkit-margin-before: 0.9em;
+      -webkit-margin-end: 0px;
+    }
+
+    .joke {
+      padding: 50px;
+    }
+
+
