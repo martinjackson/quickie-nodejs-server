@@ -1,0 +1,26 @@
+
+subject: { C: 'US',
+  O: 'U.S. Government',
+  OU: [ 'HHS', 'FDA', 'People' ],
+  CN: 'Hailin Tang -A + UID=2000602307' }
+subject: { C: 'US',
+  O: 'U.S. Government',
+  OU: [ 'HHS', 'FDA', 'People' ],
+  UID: '1300210037 + CN=Martin A. Jackson -A' }
+subject: { C: 'US',
+  O: 'U.S. Government',
+  OU: [ 'HHS', 'FDA', 'People' ],
+  UID: '1300210238 + CN=Timothy Wingfield -A' }
+subject: { C: 'US',
+  O: 'U.S. Government',
+  OU: [ 'HHS', 'FDA', 'People' ],
+  CN: 'James Abele -A + UID=2000457700' }
+subject: { C: 'US',
+  O: 'U.S. Government',
+  OU: [ 'HHS', 'FDA', 'People' ],
+  UID: '1300209811 + CN=Michael A. Beaudoin -A' }
+subject: { C: 'US',
+  O: 'U.S. Government',
+  OU: [ 'HHS', 'FDA', 'People' ],
+  UID: '1300433189 + CN=Gregory S. Robertson -A' }
+

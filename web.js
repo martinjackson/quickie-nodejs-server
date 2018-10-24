@@ -27,7 +27,23 @@ var options = {
   rejectUnauthorized: false
 };
 
+function onlyValidUsers(req, res, next) {
+  if (!req.client.authorized) {
+    res.status(405).send("Access Denied");
+    return res.end();
+    // res.set('Content-Type', 'text/html');
+    // res.send(new Buffer(fs.readFile(__dirname + 'accessdenied.html'));
+  } else {
+    var subject = req.connection.getPeerCertificate().subject;
+    console.log('subject:', subject);
+    next();
+  }
+}
+
 var app = express();
+
+// app.use(helmet());              // https://expressjs.com/en/advanced/best-practice-security.html
+app.use(onlyValidUsers);           // BLOCK not allowed 
 app.use(express.static(home));     // serve up static content
 app.use(serveIndex(home));         // serve a directory view
 
