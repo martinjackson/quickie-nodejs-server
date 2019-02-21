@@ -13,19 +13,23 @@ var colorCode = require('./colorCode.js');
 
 // Determine the port that the server is listening on
 var port = parseInt(process.argv[2] || '80', 10);
-if (port < 1000) 
+if (port < 1000)
    console.log('Operating on Port ' + port + ' requires priviledge');
 
 // The directory assigned to this server
 var home = path.join(__dirname, 'public');
 
-var options = {
-  key: fs.readFileSync("ssl/dev_nctr_fda_gov.key"),
-  cert: fs.readFileSync("ssl/dev.nctr.fda.gov.cert"),
-  ca: fs.readFileSync("ssl/CA.pem"),
-  requestCert: true,
-  rejectUnauthorized: false
-};
+var options = {};
+
+if (port == 443) {
+    options = {
+      key: fs.readFileSync("ssl/dev.server.com.key"),
+      cert: fs.readFileSync("ssl/dev.server.com.cert"),
+      ca: fs.readFileSync("ssl/CA.pem"),
+      requestCert: true,
+      rejectUnauthorized: false
+    };
+}
 
 function onlyValidUsers(req, res, next) {
   if (!req.client.authorized) {
@@ -43,7 +47,7 @@ function onlyValidUsers(req, res, next) {
 var app = express();
 
 // app.use(helmet());              // https://expressjs.com/en/advanced/best-practice-security.html
-app.use(onlyValidUsers);           // BLOCK not allowed 
+app.use(onlyValidUsers);           // BLOCK not allowed
 app.use(express.static(home));     // serve up static content
 app.use(serveIndex(home));         // serve a directory view
 
@@ -53,7 +57,7 @@ app.get('/code/:file', function (req, res) {
     .then(function(val) {
         res.send( colorCode(fname, val) );
     })
-    .catch((e) => {      
+    .catch((e) => {
       res.writeHead(404);
       return res.end('Error with file '+fname+'\n'+e.stack)
     });
