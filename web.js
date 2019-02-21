@@ -23,31 +23,46 @@ var options = {};
 
 if (port == 443) {
     options = {
-      key: fs.readFileSync("ssl/dev.server.com.key"),
-      cert: fs.readFileSync("ssl/dev.server.com.cert"),
-      ca: fs.readFileSync("ssl/CA.pem"),
+      key: fs.readFileSync("ssl/localhost.key"),
+      cert: fs.readFileSync("ssl/localhost.crt"),
+   // ca: fs.readFileSync("ssl/CA.pem"),
       requestCert: true,
       rejectUnauthorized: false
     };
 }
 
 function onlyValidUsers(req, res, next) {
-  if (!req.client.authorized) {
-    res.status(405).send("Access Denied");
-    return res.end();
-    // res.set('Content-Type', 'text/html');
-    // res.send(new Buffer(fs.readFile(__dirname + 'accessdenied.html'));
-  } else {
-    var subject = req.connection.getPeerCertificate().subject;
-    console.log('subject:', subject);
+
+  var subject = req.connection.getPeerCertificate().subject;
+
+  if (req.originalUrl != '/') {
+    // console.log(`url: '${req.originalUrl}' pass`);  uncomment if you want to see every request
     next();
+    return;
+  }
+
+  if (subject.UID.includes('CN=Martin A. Jackson -A')) {
+     console.log('subject:', subject.UID, 'url:', req.originalUrl);
+     next();
+  } else {
+      if (!req.client.authorized) {
+        res.status(405).send("Access Denied");
+        return res.end();
+        // res.set('Content-Type', 'text/html');
+        // res.send(new Buffer(fs.readFile(__dirname + 'accessdenied.html'));
+
+        console.log('Subject NOT Authorized: ', subject.UID);
+      } else {
+        console.log('Subject Authorized: ', subject.UID);
+        next();
+      }
   }
 }
 
 var app = express();
 
 // app.use(helmet());              // https://expressjs.com/en/advanced/best-practice-security.html
-app.use(onlyValidUsers);           // BLOCK not allowed
+app.use(onlyValidUsers);      // BLOCK not allowed, dont check /styles.css  /background.jpg  /favicon.ico
 app.use(express.static(home));     // serve up static content
 app.use(serveIndex(home));         // serve a directory view
 
