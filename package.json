@@ -1,15 +1,19 @@
 {
-  "name": "weblaunch",
+  "name": "quickie-nodejs-server",
   "version": "1.0.0",
-  "description": "Web Server for weblaunch.nctr.fda.gov content",
-  "main": "server.js",
+  "description": "Quicky NodeJS Web Server",
+  "main": "web.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "sudo nodemon web.js 443",
     "prod": "sudo nodemon web.js 443 >>logs/stdlog.txt 2>>logs/error.txt &"
   },
-  "author": "Martin Jackson <Martin.Jackson@fda.hhs.gov>",
+  "author": "Martin A. Jackson <martin.a.jackson@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinjackson/quickie-nodejs-server.git"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
