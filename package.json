@@ -20,7 +20,7 @@
     "fs": "0.0.1-security",
     "highlight.js": "^9.13.1",
     "http": "0.0.0",
-    "marked": "^0.5.1",
+    "marked": "^1.1.1",
     "path": "^0.12.7",
     "serve-index": "^1.9.1"
   },
